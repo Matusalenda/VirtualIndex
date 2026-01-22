@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Virtual Index</title>
+
+    <link rel="stylesheet" href="src/css/style.css" />
+    <link rel="stylesheet" href="src/css/views.css" />
+    <link rel="manifest" href="manifest.json" />
+  </head>
+
+  <body>
+    <!--  VIEW 1 - INPUT DATA -->
+    <header class="top">
+      <img src="src/img/toyota-logo.png" alt="toyota-logo" /><span
+        >VIRTUAL INDEX</span
+      >
+      <div class="btn_invisible_otherviews"></div>
+    </header>
+    <div class="view-container view__ACTIVE">
+      <main class="inputdata">
+        <div class="insert">
+          <label class="labels" for="NAME">OPERADOR:</label><br />
+          <input type="text" id="NAME" name="ID" autocomplete="off" />
+        </div>
+      </main>
+
+      <div class="dev-signature">DESENVOLVIDO POR MARCOS MATUSALEM - 2025</div>
+      <footer class="bottom">
+        <button class="btn_invisible_view1" disabled tabindex="-1">
+          INVIS
+        </button>
+        <button class="btn_invisible_view1" disabled tabindex="-1">
+          INVIS
+        </button>
+        <button class="btn_invisible_view1" disabled tabindex="-1">
+          INVIS
+        </button>
+        <button class="btns_visible" id="enterBtn" tabindex="-1">ENTER</button>
+      </footer>
+    </div>
+
+    <div class="Upper view__INACTIVE">
+      <div class="header">
+        <div class="nameOperator"></div>
+        <button class="btns_visible" id="backBtn" tabindex="-1">BACK</button>
+      </div>
+    </div>
+    <div class="view-container view__INACTIVE">
+      <!--  VIEW 2 - INPUT DATA -->
+
+      <div class="inputdata2">
+        <div class="insert">
+          <label class="labels" for="PN">PN:</label><br />
+          <input type="text" id="PN" name="PN" autocomplete="off" />
+        </div>
+
+        <div class="insert">
+          <label class="labels" for="QTY">QTD:</label><br />
+          <input type="text" id="QTY" name="QTY" autocomplete="off" disabled />
+        </div>
+      </div>
+
+      <footer class="bottom">
+        <button
+          class="btn_invisible_otherviews"
+          id="queueBtn"
+          disabled
+          tabindex="-1"
+        >
+          QUEUE
+        </button>
+        <button class="btn_invisible_otherviews" disabled tabindex="-1">
+          INVIS
+        </button>
+        <button class="btns_visible" id="modeBtn" tabindex="-1">MODE</button>
+        <button class="btns_visible" id="addBtn" tabindex="-1">ADD</button>
+      </footer>
+    </div>
+
+    <!--  VIEW 3 - QRCODE QUEUE -->
+    <div class="view-container view__INACTIVE">
+      <div class="qrcontainer">
+        <h2 class="queuetitle">INDEX QUEUE</h2>
+        <div class="qrcount" id="codeCount"></div>
+
+        <div class="qrcodeskip">
+          <button class="btnskip" id="prevBtn" tabindex="-1">◀</button>
+          <div class="qrcode-wrapper">
+            <div class="qrcode"></div>
+            <div class="deleteItem">ITEM EXCLUIDO</div>
+          </div>
+          <button class="btnskip" id="nextBtn" tabindex="-1">▶</button>
+        </div>
+        <br />
+        <div class="qrdata" id="codeInfo"></div>
+      </div>
+      <footer class="bottom">
+        <button class="btns_visible" id="deleteBtn" tabindex="-1">
+          DELETE
+        </button>
+        <button class="btns_visible" id="clearBtn" tabindex="-1">CLEAR</button>
+        <button class="btn_invisible_otherviews" tabindex="-1">INVIS</button>
+        <button class="btn_invisible_otherviews" tabindex="-1">INVIS</button>
+      </footer>
+    </div>
+
+    <script src="src/JS/script.js"></script>
+    <script src="src/JS/libs/qrcode-lib.js"></script>
+  </body>
+</html>

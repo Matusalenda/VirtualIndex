@@ -1,0 +1,41 @@
+/* view 1 */
+
+.btn_invisible_view1 {
+  visibility: hidden;
+  border: none;
+  font-weight: bold;
+  font-size: 2vh;
+  width: fit-content;
+  height: 80%;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.btn_invisible_otherviews {
+  opacity: 0;
+  border: none;
+  font-weight: bold;
+  font-size: 2vh;
+  width: fit-content;
+  height: 80%;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.btn_transparent_queue {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.btnskip.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.view__INACTIVE {
+  display: none;
+}
+
+.view__ACTIVE {
+  display: block;
+}

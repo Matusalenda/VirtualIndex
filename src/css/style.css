@@ -1,0 +1,269 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  overflow: hidden;
+  height: 100%;
+}
+
+*:focus {
+  border: 4px solid ORANGE !important;
+  outline: none;
+}
+
+.top {
+  background-color: rgb(69, 67, 67);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3vh;
+  font-weight: bold;
+  font-size: 3vh;
+  color: white;
+  width: 100vw;
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  overflow: hidden;
+
+  border-bottom: 2px solid white;
+}
+
+.header {
+  width: 100vw;
+  height: 7vh;
+  background-color: rgb(69, 67, 67);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 10px;
+}
+
+.nameOperator {
+  font-size: 2vh;
+  color: white;
+}
+
+.bottom {
+  display: flex;
+  min-width: fit-content;
+  align-items: center;
+  justify-content: space-around;
+  width: 100vw;
+  height: 7vh;
+  background-color: rgb(69, 67, 67);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.inputdata {
+  display: flex;
+  box-sizing: border-box;
+  text-align: center;
+  width: 100vw;
+  margin-top: 4vh;
+  height: fit-content;
+  min-width: fit-content;
+  overflow: hidden;
+  background-color: white;
+  flex-direction: column;
+  gap: 10vh;
+  padding-bottom: 30px;
+}
+
+.inputdata2 {
+  display: flex;
+  box-sizing: border-box;
+  text-align: center;
+  width: 100vw;
+  margin-top: 12vh;
+  height: fit-content;
+  min-width: fit-content;
+  overflow: hidden;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15vh;
+
+  padding-bottom: 30px;
+}
+
+.btns_visible {
+  background-color: rgb(215, 210, 210);
+  color: black;
+  font-weight: bold;
+  font-size: 2.5vh;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.btns_visible:focus,
+.btns_visible:active {
+  outline: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#NAME {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  text-align: center;
+  height: 8vh;
+  width: 50vw;
+  border: 2px solid rgb(6, 69, 187);
+  border-radius: 7px;
+}
+
+#PN {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  text-align: center;
+  height: 8vh;
+  width: 50vw;
+  border: 2px solid rgb(6, 69, 187);
+  border-radius: 7px;
+}
+
+#QTY {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  text-align: center;
+  width: 20vw;
+  height: 8vh;
+  border: 2px solid rgb(6, 69, 187);
+  border-radius: 7px;
+}
+
+input:disabled {
+  background-color: rgb(84, 83, 83);
+  color: white;
+}
+
+.labels {
+  font-family: Arial, Helvetica, Sans-Serif;
+  font-weight: bold;
+  font-size: 1em;
+  color: black;
+}
+
+.dev-signature {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 7.3vh;
+  width: 100vw;
+  text-align: center;
+  font-size: 1.5vh;
+  color: #333;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4px 0;
+}
+
+.qrcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.qrcode {
+  border-radius: 10px;
+  border-top: 3.5px solid rgb(39, 73, 242);
+  border-left: 3.5px solid rgb(39, 73, 242);
+  border-right: 3.5px solid rgb(43, 5, 170);
+  border-bottom: 3.5px solid rgb(43, 5, 170);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 28vh;
+  height: 30vh;
+  background-color: white;
+}
+
+.queuetitle {
+  font-family: Arial, Helvetica, Sans-Serif;
+  font-weight: bold;
+  font-size: 4vh;
+  color: black;
+}
+.qrdata {
+  width: fit-content;
+  flex-wrap: wrap;
+  font-family: Arial, Helvetica, Sans-Serif;
+  font-weight: bold;
+  font-size: 3.5vh;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.qrcodeskip {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.btnskip {
+  background-color: transparent;
+  font-weight: bold;
+  width: 13%;
+  height: fit-content;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: 3vh;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+.qrcount {
+  font-family: Arial, Helvetica, Sans-Serif;
+  font-weight: bold;
+  font-size: 5vh;
+  color: blue;
+  width: fit-content;
+}
+
+.qrcode-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteItem {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: red;
+  text-align: center;
+  font-weight: bold;
+  font-size: 3vh;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
