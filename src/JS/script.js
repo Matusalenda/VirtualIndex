@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Seleciona todas as views
+  // Select all views and header
   const views = document.querySelectorAll(".view-container");
   const header = document.querySelector(".Upper");
 
@@ -19,6 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
     btnMode: document.getElementById("modeBtn"),
     btnAdd: document.getElementById("addBtn"),
     btnQueue: document.getElementById("queueBtn"),
+  };
+
+  // View 3
+  const view3 = {
     btnPrev: document.getElementById("prevBtn"),
     btnNext: document.getElementById("nextBtn"),
     btnDelete: document.getElementById("deleteBtn"),
@@ -253,27 +257,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Handle button visibility
       if (state.qrcodeQueue.length === 1) {
-        view2.btnPrev.classList.add("disabled");
-        view2.btnPrev.tabIndex = -1;
-        view2.btnNext.classList.add("disabled");
-        view2.btnNext.tabIndex = -1;
-        view2.btnDelete.classList.remove("btns_visible");
-        view2.btnDelete.classList.add("btn_invisible_otherviews");
-        view2.btnDelete.tabIndex = -1;
-        view2.btnClear.classList.remove("btn_invisible_otherviews");
-        view2.btnClear.classList.add("btns_visible");
-        view2.btnClear.tabIndex = 0;
+        view3.btnPrev.classList.add("disabled");
+        view3.btnPrev.tabIndex = -1;
+        view3.btnNext.classList.add("disabled");
+        view3.btnNext.tabIndex = -1;
+        view3.btnDelete.classList.remove("btns_visible");
+        view3.btnDelete.classList.add("btn_invisible_otherviews");
+        view3.btnDelete.tabIndex = -1;
+        view3.btnClear.classList.remove("btn_invisible_otherviews");
+        view3.btnClear.classList.add("btns_visible");
+        view3.btnClear.tabIndex = 0;
       } else if (state.qrcodeQueue.length > 1) {
-        view2.btnPrev.classList.add("disabled");
-        view2.btnPrev.tabIndex = -1;
-        view2.btnNext.classList.remove("disabled");
-        view2.btnNext.tabIndex = 0;
-        view2.btnDelete.classList.remove("btn_invisible_otherviews");
-        view2.btnDelete.classList.add("btns_visible");
-        view2.btnDelete.tabIndex = 0;
-        view2.btnClear.classList.remove("btns_visible");
-        view2.btnClear.classList.add("btn_invisible_otherviews");
-        view2.btnClear.tabIndex = -1;
+        view3.btnPrev.classList.add("disabled");
+        view3.btnPrev.tabIndex = -1;
+        view3.btnNext.classList.remove("disabled");
+        view3.btnNext.tabIndex = 0;
+        view3.btnDelete.classList.remove("btn_invisible_otherviews");
+        view3.btnDelete.classList.add("btns_visible");
+        view3.btnDelete.tabIndex = 0;
+        view3.btnClear.classList.remove("btns_visible");
+        view3.btnClear.classList.add("btn_invisible_otherviews");
+        view3.btnClear.tabIndex = -1;
       }
 
       state.Actualview++;
@@ -281,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Next button - navigate to next QR code
-  view2.btnNext.addEventListener("click", () => {
+  view3.btnNext.addEventListener("click", () => {
     if (state.ActualIndex < state.qrcodeQueue.length - 1) {
       state.ActualIndex++;
 
@@ -296,26 +300,26 @@ document.addEventListener("DOMContentLoaded", () => {
       }/${state.qrcodeQueue.length}`;
 
       // Show prev button
-      view2.btnPrev.classList.remove("disabled");
-      view2.btnPrev.tabIndex = 0;
+      view3.btnPrev.classList.remove("disabled");
+      view3.btnPrev.tabIndex = 0;
 
       // Hide next button if at the end
       if (state.ActualIndex === state.qrcodeQueue.length - 1) {
-        view2.btnNext.classList.add("disabled");
-        view2.btnNext.tabIndex = -1;
+        view3.btnNext.classList.add("disabled");
+        view3.btnNext.tabIndex = -1;
 
-        view2.btnDelete.tabIndex = -1;
-        view2.btnClear.classList.replace(
+        view3.btnDelete.tabIndex = -1;
+        view3.btnClear.classList.replace(
           "btn_invisible_otherviews",
           "btns_visible",
         );
-        view2.btnClear.tabIndex = 0;
+        view3.btnClear.tabIndex = 0;
       }
     }
   });
 
   // Prev button - navigate to previous QR code
-  view2.btnPrev.addEventListener("click", () => {
+  view3.btnPrev.addEventListener("click", () => {
     if (state.ActualIndex > 0) {
       state.ActualIndex--;
 
@@ -330,33 +334,33 @@ document.addEventListener("DOMContentLoaded", () => {
       }/${state.qrcodeQueue.length}`;
 
       // Show next button
-      view2.btnNext.classList.remove("disabled");
-      view2.btnNext.tabIndex = 0;
+      view3.btnNext.classList.remove("disabled");
+      view3.btnNext.tabIndex = 0;
 
       // Hide prev button if at the beginning
       if (state.ActualIndex === 0) {
-        view2.btnPrev.classList.add("disabled");
-        view2.btnPrev.tabIndex = -1;
+        view3.btnPrev.classList.add("disabled");
+        view3.btnPrev.tabIndex = -1;
       }
 
       // Show DELETE button when not at the last item
       if (state.ActualIndex < state.qrcodeQueue.length - 1) {
-        view2.btnDelete.classList.replace(
+        view3.btnDelete.classList.replace(
           "btn_invisible_otherviews",
           "btns_visible",
         );
-        view2.btnDelete.tabIndex = 0;
-        view2.btnClear.classList.replace(
+        view3.btnDelete.tabIndex = 0;
+        view3.btnClear.classList.replace(
           "btns_visible",
           "btn_invisible_otherviews",
         );
-        view2.btnClear.tabIndex = -1;
+        view3.btnClear.tabIndex = -1;
       }
     }
   });
 
   // Delete button - remove current QR code from queue
-  view2.btnDelete.addEventListener("click", () => {
+  view3.btnDelete.addEventListener("click", () => {
     if (state.qrcodeQueue.length > 0) {
       // Show delete message
       const deleteMsg = document.querySelector(".deleteItem");
@@ -390,59 +394,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Update button visibility
         if (state.qrcodeQueue.length === 1) {
-          view2.btnPrev.classList.add("disabled");
-          view2.btnPrev.tabIndex = -1;
-          view2.btnNext.classList.add("disabled");
-          view2.btnNext.tabIndex = -1;
-          view2.btnDelete.classList.replace(
+          view3.btnPrev.classList.add("disabled");
+          view3.btnPrev.tabIndex = -1;
+          view3.btnNext.classList.add("disabled");
+          view3.btnNext.tabIndex = -1;
+          view3.btnDelete.classList.replace(
             "btns_visible",
             "btn_invisible_otherviews",
           );
-          view2.btnDelete.tabIndex = -1;
-          view2.btnClear.classList.replace(
+          view3.btnDelete.tabIndex = -1;
+          view3.btnClear.classList.replace(
             "btn_invisible_otherviews",
             "btns_visible",
           );
-          view2.btnClear.tabIndex = 0;
+          view3.btnClear.tabIndex = 0;
         } else if (state.ActualIndex === state.qrcodeQueue.length - 1) {
-          view2.btnNext.classList.add("disabled");
-          view2.btnNext.tabIndex = -1;
-          view2.btnDelete.classList.replace(
+          view3.btnNext.classList.add("disabled");
+          view3.btnNext.tabIndex = -1;
+          view3.btnDelete.classList.replace(
             "btns_visible",
             "btn_invisible_otherviews",
           );
-          view2.btnDelete.tabIndex = -1;
-          view2.btnClear.classList.replace(
+          view3.btnDelete.tabIndex = -1;
+          view3.btnClear.classList.replace(
             "btn_invisible_otherviews",
             "btns_visible",
           );
-          view2.btnClear.tabIndex = 0;
+          view3.btnClear.tabIndex = 0;
           // Show prev button if not at beginning
           if (state.ActualIndex > 0) {
-            view2.btnPrev.classList.remove("disabled");
-            view2.btnPrev.tabIndex = 0;
+            view3.btnPrev.classList.remove("disabled");
+            view3.btnPrev.tabIndex = 0;
           }
         } else {
-          view2.btnDelete.classList.replace(
+          view3.btnDelete.classList.replace(
             "btn_invisible_otherviews",
             "btns_visible",
           );
-          view2.btnDelete.tabIndex = 0;
-          view2.btnClear.classList.replace(
+          view3.btnDelete.tabIndex = 0;
+          view3.btnClear.classList.replace(
             "btns_visible",
             "btn_invisible_otherviews",
           );
-          view2.btnClear.tabIndex = -1;
+          view3.btnClear.tabIndex = -1;
           // Show next button
-          view2.btnNext.classList.remove("disabled");
-          view2.btnNext.tabIndex = 0;
+          view3.btnNext.classList.remove("disabled");
+          view3.btnNext.tabIndex = 0;
           // Show prev button if not at beginning
           if (state.ActualIndex > 0) {
-            view2.btnPrev.classList.remove("disabled");
-            view2.btnPrev.tabIndex = 0;
+            view3.btnPrev.classList.remove("disabled");
+            view3.btnPrev.tabIndex = 0;
           } else {
-            view2.btnPrev.classList.add("disabled");
-            view2.btnPrev.tabIndex = -1;
+            view3.btnPrev.classList.add("disabled");
+            view3.btnPrev.tabIndex = -1;
           }
         }
       }, 800);
@@ -450,7 +454,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Clear button - delete entire queue
-  view2.btnClear.addEventListener("click", () => {
+  view3.btnClear.addEventListener("click", () => {
     // Show clear message
     const deleteMsg = document.querySelector(".deleteItem");
     deleteMsg.textContent = "FILA EXCLUÍDA COM SUCESSO";
@@ -498,7 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (state.Actualview === 1 && state.qrcodeQueue.length > 0) {
           view2.btnQueue.click();
         } else if (state.Actualview === 2 && state.qrcodeQueue.length > 1) {
-          view2.btnDelete.click();
+          view3.btnDelete.click();
         }
         break;
 
@@ -510,7 +514,7 @@ document.addEventListener("DOMContentLoaded", () => {
           state.Actualview === 2 &&
           state.ActualIndex === state.qrcodeQueue.length - 1
         ) {
-          view2.btnClear.click();
+          view3.btnClear.click();
         }
         break;
 
@@ -538,16 +542,18 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
 
       case "ArrowRight":
+      case "6":
         if (state.Actualview === 2) {
           event.preventDefault();
-          if (view2.btnNext) view2.btnNext.click();
+          if (view3.btnNext) view3.btnNext.click();
         }
         break;
 
       case "ArrowLeft":
+      case "4":
         if (state.Actualview === 2) {
           event.preventDefault();
-          if (view2.btnPrev) view2.btnPrev.click();
+          if (view3.btnPrev) view3.btnPrev.click();
         }
         break;
 
