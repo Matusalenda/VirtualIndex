@@ -15,8 +15,12 @@ body {
   height: 100%;
 }
 
-*:focus {
+input:focus {
   border: 4px solid ORANGE !important;
+  outline: none;
+}
+button:focus {
+  
   outline: none;
 }
 
