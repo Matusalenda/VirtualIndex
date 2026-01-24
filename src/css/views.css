@@ -30,6 +30,9 @@
 .btnskip.disabled {
   opacity: 0.3;
   pointer-events: none;
+  background-color: transparent;
+  color: transparent;
+  border: 1px solid transparent;
 }
 
 .view__INACTIVE {
