@@ -28,11 +28,16 @@
 }
 
 .btnskip.disabled {
-  opacity: 0.3;
+  visibility: hidden;
   pointer-events: none;
-  background-color: transparent;
-  color: transparent;
-  border: 1px solid transparent;
+  opacity: 0;
+}
+
+.btnskip.disabled:focus,
+.btnskip.disabled:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .view__INACTIVE {
@@ -42,3 +47,4 @@
 .view__ACTIVE {
   display: block;
 }
+
