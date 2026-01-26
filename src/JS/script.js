@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Select all views and header
   const views = document.querySelectorAll(".view-container");
   const header = document.querySelector(".Upper");
+  const modalALert = document.querySelector(".alertModal");
 
   // View 1
   const view1 = {
@@ -37,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     qtyCount: 0, // auto count
     qrcodeQueue: [],
     ActualIndex: 0, // index to alternate by the qrcodes on the queue.
+    focusTarget: null, // armazena qual input deve receber foco após alert
   };
 
   // Initial focus
@@ -68,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       state.Actualview++;
     } else {
-      alert("Insira um nome de usuário!");
+      customAlert("Insira o nome de usuário!");
       input.focus();
     }
   });
@@ -106,6 +108,13 @@ document.addEventListener("DOMContentLoaded", () => {
       views[1].classList.replace("view__INACTIVE", "view__ACTIVE");
 
       views[2].classList.replace("view__ACTIVE", "view__INACTIVE");
+
+      // Limpa inputs e placeholder quando volta da view 3
+      view2.inputPN.value = "";
+      view2.inputPN.placeholder = "";
+      view2.inputQTY.value = "0";
+      state.qtyCount = 0;
+
       view2.inputPN.focus();
 
       // Update queue button text with current length
@@ -148,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (view2.inputPN.placeholder !== "") {
         view2.inputPN.value = view2.inputPN.placeholder;
+        view2.inputPN.placeholder = "";
         view2.inputQTY.value = "";
         view2.inputQTY.focus();
       } else {
@@ -187,22 +197,25 @@ document.addEventListener("DOMContentLoaded", () => {
       let midPn = desconcatvalues[1].slice(5, 10);
       let rightPn = desconcatvalues[1].slice(10);
 
+      let pnFormatted;
       if (desconcatvalues[1].length === 12) {
-        state.qrcodeQueue.push({
-          qrcode: concatvalues,
-          infos: `PN: ${leftPn}-${midPn}-${rightPn}}<br>QTY: ${desconcatvalues[2]}`,
-        });
+        // PN com 12 caracteres: xxxxx-xxxxx-xx
+        pnFormatted = `${leftPn}-${midPn}-${rightPn}`;
       } else if (desconcatvalues[1].length === 10) {
-        state.qrcodeQueue.push({
-          qrcode: concatvalues,
-          infos: `PN: ${leftPn}-${midPn}<br>QTY: ${desconcatvalues[2]}`,
-        });
+        // PN com 10 caracteres: xxxxx-xxxxx
+        pnFormatted = `${leftPn}-${midPn}`;
+      } else if (desconcatvalues[1].length <= 5) {
+        // PN com 5 ou menos caracteres: xxxxx
+        pnFormatted = leftPn;
       } else {
-        state.qrcodeQueue.push({
-          qrcode: concatvalues,
-          infos: `PN: ${leftPn}<br>QTY: ${desconcatvalues[2]}`,
-        });
+        // PN com 6-9 ou 11 ou 13+ caracteres: xxxxx-xxxxx
+        pnFormatted = `${leftPn}-${midPn}`;
       }
+
+      state.qrcodeQueue.push({
+        qrcode: concatvalues,
+        infos: `PN: ${pnFormatted}<br>QTY: ${desconcatvalues[2]}`,
+      });
 
       view2.btnQueue.innerText = `QUEUE(${state.qrcodeQueue.length})`;
       view2.btnQueue.classList.replace(
@@ -223,15 +236,24 @@ document.addEventListener("DOMContentLoaded", () => {
         view2.inputQTY.value = "";
       }
     } else {
-      alert("Todos os campos devem ser preenchidos!");
-
-      const inputArray = [view2.inputPN, view2.inputQTY];
-      const firstEmptyInput = inputArray.find(
-        (input) => input.value.trim() === "" || input.value === "0",
-      );
-      if (firstEmptyInput) {
-        firstEmptyInput.focus();
+      // Determina qual input deve receber foco baseado no modo e campos vazios
+      if (state.isAuto) {
+        state.focusTarget = view2.inputPN;
+      } else {
+        // No modo Manual, prioriza PN vazio, depois QTY vazio
+        if (ultimopn === "") {
+          state.focusTarget = view2.inputPN;
+        } else if (
+          view2.inputQTY.value.trim() === "" ||
+          view2.inputQTY.value === "0"
+        ) {
+          state.focusTarget = view2.inputQTY;
+        } else {
+          state.focusTarget = view2.inputPN;
+        }
       }
+
+      customAlert("Todos os campos devem ser preenchidos!");
     }
   });
 
@@ -574,11 +596,26 @@ document.addEventListener("DOMContentLoaded", () => {
       case "Tab":
       case "Enter":
         event.preventDefault();
+
+        if (modalALert.style.display === "flex") {
+          // Fecha o modal e aplica o foco do focusTarget
+          modalALert.style.display = "none";
+
+          if (state.Actualview === 0) {
+            view1.inputOperator.focus();
+          } else if (state.Actualview === 1 && state.focusTarget) {
+            state.focusTarget.focus();
+            state.focusTarget = null;
+          } else if (state.Actualview === 1) {
+            view2.inputPN.focus();
+          }
+          return;
+        }
         const currentPn = view2.inputPN.value.trim().toUpperCase();
 
         if (state.Actualview === 1 && state.isAuto) {
           if (currentPn === "" && state.lastPn === "") {
-            alert("Insira algum Pn!");
+            customAlert("Insira algum Pn!");
           } else if (state.lastPn === "" || currentPn === state.lastPn) {
             if (state.lastPn === "") {
               state.lastPn = currentPn;
@@ -590,7 +627,7 @@ document.addEventListener("DOMContentLoaded", () => {
             view2.inputPN.value = "";
             view2.inputPN.focus();
           } else {
-            alert("Part-number incorreto!");
+            customAlert("Part-number incorreto!");
             view2.inputPN.focus();
             view2.inputPN.select();
           }
@@ -598,7 +635,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (view1.inputOperator.value.trim() !== "") {
             view1.btnEnter.click();
           } else {
-            alert("Insira o nome de usuário!");
+            customAlert("Insira o nome de usuário!");
           }
         } else if (currentIndex === inputElements.length - 1) {
           view2.btnAdd.click();
@@ -623,4 +660,27 @@ document.addEventListener("DOMContentLoaded", () => {
       correctLevel: QRCode.CorrectLevel.H,
     });
   }
+
+  const alertMessage = document.querySelector(".alertMessage");
+  const alertBtn = document.querySelector(".alertConfirm");
+  function customAlert(msg) {
+    modalALert.style.display = "flex";
+    alertMessage.innerText = msg;
+    alertBtn.focus();
+  }
+
+  alertBtn.onclick = () => {
+    modalALert.style.display = "none";
+
+    // Retorna o foco para o input apropriado
+    if (state.Actualview === 0) {
+      view1.inputOperator.focus();
+    } else if (state.Actualview === 1 && state.focusTarget) {
+      state.focusTarget.focus();
+      state.focusTarget = null; // Limpa após usar
+    } else if (state.Actualview === 1) {
+      // Fallback
+      view2.inputPN.focus();
+    }
+  };
 });

@@ -112,6 +112,83 @@
       </footer>
     </div>
 
+    <div class="alertModal">
+      <div class="alertBox">
+        <div class="sign">!</div>
+
+        <span class="alertMessage"></span>
+        <button class="alertConfirm">OK</button>
+      </div>
+    </div>
+    <style>
+      .alertModal {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        z-index: 9999;
+      }
+
+      .alertBox {
+        width: min(90%, 360px);
+        padding: 20px 16px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+
+        background-color: #373636;
+        border: 3px solid orange;
+        border-radius: 14px;
+
+        box-shadow:
+          0 15px 40px rgba(0, 0, 0, 0.9),
+          0 0 0 2px rgba(255, 179, 0, 0.25);
+
+        animation: pop 0.2s ease-out;
+      }
+
+      .sign {
+        width: 36px;
+        height: 36px;
+
+        border: 2px solid red;
+        border-radius: 50%;
+        color: red;
+        font-size: 1.4rem;
+        font-weight: bold;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .alertMessage {
+        color: white;
+        font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+        text-align: center;
+      }
+
+      .alertConfirm {
+        padding: 6px 28px;
+        font-weight: bold;
+        color: white;
+        border: transparent;
+        border-radius: 6px;
+        font-size: clamp(1rem, 3vw, 1.2rem);
+        background: linear-gradient(180deg, #ffb300, #ff9800);
+        box-shadow: 0 3px 0 #c77700;
+      }
+
+      .alertConfirm:active {
+        transform: translateY(2px);
+        box-shadow: 0 1px 0 #c77700;
+      }
+    </style>
+
     <script src="src/JS/script.js"></script>
     <script src="src/JS/libs/qrcode-lib.js"></script>
   </body>
