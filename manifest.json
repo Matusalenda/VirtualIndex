@@ -1,9 +1,10 @@
 {
+  "id": "./",
   "name": "Virtual Index",
   "short_name": "VIndex",
   "description": "Virtual Index Application",
-  "start_url": "index.html",
-  "scope": "/",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#ffffff",
