@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
       view2.inputPN.placeholder = "";
       view2.inputQTY.value = "0";
       state.qtyCount = 0;
-
+      state.lastPn = "";
       view2.inputPN.focus();
 
       // Update queue button text with current length
